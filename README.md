@@ -32,3 +32,10 @@
     -   index.scss : 메인 scss파일
 -   types (typescript 타입정의)
 -   utils (유틸리티 함수)
+
+## git Branch
+
+-   production : 운영배포 브랜치
+-   master: 개발 최종 브랜치
+-   etc: fix, dev, 기타 브랜치
+-   브랜치 관리 : etc(개발) -> master 머지 -> 테스트 -> production 머지 -> 배포
