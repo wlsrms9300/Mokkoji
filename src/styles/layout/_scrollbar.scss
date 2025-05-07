@@ -1,0 +1,21 @@
+@use '../abstracts/_variables.scss' as *;
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 6px;
+    transition: 0.3s ease;
+}
+/* Scrollbar Background Style */
+*::-webkit-scrollbar-track {
+    background: #eee;
+}
+/* Scrollbar Body Style */
+*::-webkit-scrollbar-thumb {
+    background-color: $primary;
+}
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: $primary #eee;
+    /* body background */
+}

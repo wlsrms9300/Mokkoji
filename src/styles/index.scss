@@ -1,0 +1,4 @@
+// scss 파일 임포트 , 변수 선언 등 초기 설정 (모든 화면에 공통으로 적용할 내용)
+@use './base/_reset.scss' as *;
+@use './layout/_scrollbar.scss' as *;
+@use './abstracts/_variables.scss' as *;
