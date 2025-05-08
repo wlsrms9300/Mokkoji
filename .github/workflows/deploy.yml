@@ -63,13 +63,21 @@
 #           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
 #           docker run -d -p 3000:3000 --name mokkoji --restart always ${{ env.DOCKER_IMAGE }}:latest
 
-name: test workflow
-on: [push]
+name: Test Workflow
+
+on:
+    push:
+        branches: main
+
 jobs:
-    check-bats-version:
+    build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-            - run: npm install -g bats
-            - run: bats -v
+            - name: Checkout
+                uses: actions/checkout@v3
+            - name: Check Node Version
+                run: node -v
+            - name: Install dependencies
+                run: yarn install --frozen-lockfile
+            - name: Build
+                run: yarn beta
