@@ -73,14 +73,14 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            name: Checkout
-            uses: actions/checkout@v2
+            - name: Checkout
+              uses: actions/checkout@v2
 
-            name: Check Node Version
-            run: node -v
+            - name: Check Node Version
+              run: node -v
 
-            name: Install dependencies
-            run: yarn install --frozen-lockfile
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
 
-            name: Build
-            run: yarn beta
+            - name: Build
+              run: yarn beta
