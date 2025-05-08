@@ -36,7 +36,7 @@
 #                 password: ${{ secrets.GHCR_TOKEN }}
 #                 # 우리가 방금 복사해서 setting secrets 에 붙여줬던 token 이다. 이름을 기억해 넣어주자.
 #                 # 우리의 ghcr.io 에 접근하기 위함이다.
-                
+
 #             - name: Build and push
 #                 id: docker_build
 #                 uses: docker/build-push-action@v2
@@ -57,23 +57,19 @@
 #           registry: ghcr.io
 #           username: ${{ github.actor }}
 #           password: ${{ secrets.GHCR_TOKEN }}
-      
+
 #       - name: Docker run
 #         run: |
 #           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
 #           docker run -d -p 3000:3000 --name mokkoji --restart always ${{ env.DOCKER_IMAGE }}:latest
-          
 
-
-name: Deploy
-
-on:
-    push:
-        branches: [main]
+name: test workflow
+on: [push]
 jobs:
-    runs-on: ubuntu-latest
-    steps:
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
-        run: node -v
-
+    check-bats-version:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+            - run: npm install -g bats
+            - run: bats -v
