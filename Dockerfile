@@ -21,11 +21,7 @@ RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
 
 # 위 스테이지에서 생성한 빌드 결과를 nginx의 샘플 앱이 사용하던 폴더로 이동
-COPY --from=build /app/dist /usr/share/nginx/html
-RUN if [ "${BUILD_COMMAND}" = "beta" ]; then \
-        rm -rf /usr/share/nginx/html/* && \
-        cp -r /app/beta/* /usr/share/nginx/html/; \
-    fi
+COPY --from=build /app/${BUILD_FILE} /usr/share/nginx/html
 
 EXPOSE 80
 

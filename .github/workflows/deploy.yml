@@ -32,10 +32,12 @@ jobs:
                     echo "ENVIRONMENT=dev" >> $GITHUB_ENV
                     echo "BUILD_COMMAND=beta" >> $GITHUB_ENV
                     echo "DOCKER_TAG=dev" >> $GITHUB_ENV
+                    echo "BUILD_FILE=beta" >> $GITHUB_ENV
                   else
                     echo "ENVIRONMENT=prod" >> $GITHUB_ENV
                     echo "BUILD_COMMAND=build" >> $GITHUB_ENV
                     echo "DOCKER_TAG=prod" >> $GITHUB_ENV
+                    echo "BUILD_FILE=dist" >> $GITHUB_ENV
                   fi
 
             - name: Build
