@@ -1,10 +1,12 @@
-## 테스트 배포 워크플로우
+## 배포 워크플로우
 
-name: Test Workflow
+name: Deploy Workflow
 
 on:
     push:
-        branches: main
+        branches:
+            - main
+            - production
 
 jobs:
     deploy:
@@ -24,8 +26,20 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: yarn install
 
+            - name: Set environment variables
+              run: |
+                  if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+                    echo "ENVIRONMENT=dev" >> $GITHUB_ENV
+                    echo "BUILD_COMMAND=beta" >> $GITHUB_ENV
+                    echo "DOCKER_TAG=dev" >> $GITHUB_ENV
+                  else
+                    echo "ENVIRONMENT=prod" >> $GITHUB_ENV
+                    echo "BUILD_COMMAND=build" >> $GITHUB_ENV
+                    echo "DOCKER_TAG=prod" >> $GITHUB_ENV
+                  fi
+
             - name: Build
-              run: yarn beta
+              run: yarn ${{ env.BUILD_COMMAND }}
 
             - name: Login to DockerHub
               uses: docker/login-action@v3
@@ -42,6 +56,6 @@ jobs:
                   context: .
                   file: ./Dockerfile
                   push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/mokkoji:dev
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/mokkoji:${{ env.DOCKER_TAG }}
 
             # 아래 ec2 에 hub의 이미지를 가져와서 실행하는 명령 추가 (ec2 설정완료 후 진행)
