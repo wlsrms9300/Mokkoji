@@ -1,4 +1,4 @@
-## 테스트 빌드 코드 작성 
+## 빌드 코드 작성 
 
 FROM node:22.14.0 AS build
 
@@ -10,7 +10,9 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn beta
+# 환경 변수에 따라 다른 빌드 명령어 실행
+ARG BUILD_COMMAND=beta
+RUN yarn ${BUILD_COMMAND}
 
 FROM nginx:stable-alpine
 
@@ -19,7 +21,7 @@ RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
 
 # 위 스테이지에서 생성한 빌드 결과를 nginx의 샘플 앱이 사용하던 폴더로 이동
-COPY --from=build /app/beta /usr/share/nginx/html
+COPY --from=build /app/${BUILD_COMMAND === 'build' ? 'dist' : 'beta'} /usr/share/nginx/html
 
 EXPOSE 80
 
