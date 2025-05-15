@@ -55,7 +55,6 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
                 { find: '@styles', replacement: '/src/styles' },
             ],
         },
-        // 빌드 시 설정 추가
     }
 
     return config

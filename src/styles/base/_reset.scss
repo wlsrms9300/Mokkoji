@@ -32,12 +32,6 @@ ol[role='list'] {
     list-style: none;
 }
 
-/* 핵심 body의 기본값을 설정 */
-body {
-    min-height: 100vh;
-    line-height: 1.5;
-}
-
 /* 제목 요소와 상호작용하는 요소에 대해 line-height를 더 짧게 설정 */
 h1,
 h2,
@@ -86,4 +80,40 @@ textarea:not([rows]) {
 /* 고정된 모든 항목에는 여분의 스크롤 여백 */
 :target {
     scroll-margin-block: 5ex;
+}
+
+/* body 설정 */
+
+/* 핵심 body의 기본값을 설정 */
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    margin: 0;
+    font-size: 1rem;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+        'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+
+:root {
+    font-size: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+    /** 테블릿 스타일 */
+    :root {
+        font-size: 0.9rem;
+    }
+}
+@media screen and (min-width: 1024px) {
+    /** 데스크톱 스타일 */
+    :root {
+        font-size: 1rem;
+    }
+}
+
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.5rem;
 }
