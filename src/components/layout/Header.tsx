@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import header from '@styles/components/header.module.scss'
+import { useModalStore } from '@stores/globalStore'
 
 export default function Header() {
     const [scrolled, setScrolled] = useState(false)
+    const { openModal } = useModalStore()
+
+    /**
+     * @function handleModal
+     * @description 모달 창 열기
+     */
+    const handleModal = () => {
+        openModal(true, () => {}, <div>테스트</div>)
+    }
 
     useEffect(() => {
         const onScroll = () => {
@@ -13,25 +23,29 @@ export default function Header() {
     }, [])
 
     return (
-        <header className={`${header.mainHeader} ${scrolled ? header.shadow : ''}`}>
-            <div className={header.headerContent}>
-                <div className={header.logo}>
-                    <a href="/">Logo</a>
+        <>
+            <header className={`${header.mainHeader} ${scrolled ? header.shadow : ''}`}>
+                <div className={header.headerContent}>
+                    <div className={header.logo}>
+                        <a href="/">Logo</a>
+                    </div>
+                    <div className={header.actionsWrapper}>
+                        <nav className={header.navigation}>
+                            <ul>
+                                <li>
+                                    <a href="#portfolio">Button1</a>
+                                </li>
+                                <li>
+                                    <a href="#contact">Button2</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <button className={header.loginButton} onClick={handleModal}>
+                            로그인
+                        </button>
+                    </div>
                 </div>
-                <div className={header.actionsWrapper}>
-                    <nav className={header.navigation}>
-                        <ul>
-                            <li>
-                                <a href="#portfolio">Button1</a>
-                            </li>
-                            <li>
-                                <a href="#contact">Button2</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <button className={header.loginButton}>로그인</button>
-                </div>
-            </div>
-        </header>
+            </header>
+        </>
     )
 }

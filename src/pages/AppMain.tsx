@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '@components/layout/Header'
 import AutoBanner from '@components/common/AutoBanner'
+import Modal from '@components/common/Modal'
 import main from '@styles/pages/main.module.scss'
 import sample1 from '@images/sample1.png'
 import sample2 from '@images/sample2.png'
@@ -9,6 +10,7 @@ import sample4 from '@images/sample4.png'
 
 export default function AppMain() {
     const [visible, setVisible] = useState(false)
+
     const images = [
         { src: sample1, alt: '배너1' },
         { src: sample2, alt: '배너2' },
@@ -109,6 +111,7 @@ export default function AppMain() {
             <button className={`${main.scrollTopBtn} ${visible ? main.visible : ''}`} onClick={handleClick} aria-label="맨 위로 이동">
                 ↑
             </button>
+            <Modal />
         </>
     )
 }

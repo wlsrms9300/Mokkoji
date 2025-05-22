@@ -27,7 +27,8 @@
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"],
             "@hooks/*": ["src/hooks/*"],
-            "@images/*": ["src/assets/images/*"]
+            "@images/*": ["src/assets/images/*"],
+            "@stores/*": ["src/stores/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],

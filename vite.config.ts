@@ -53,6 +53,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
                 { find: '@hooks', replacement: '/src/hooks' },
                 { find: '@utils', replacement: '/src/utils' },
                 { find: '@styles', replacement: '/src/styles' },
+                { find: '@stores', replacement: '/src/stores' },
             ],
         },
     }

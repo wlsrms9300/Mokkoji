@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styles from '@styles/components/banner.module.scss'
+import banner from '@styles/components/banner.module.scss'
 
 type BannerImage = { src: string; alt?: string }
 
@@ -31,32 +31,32 @@ export default function AutoBanner({ images, aspectRatio = 2, intervalMs = 3000,
     }, [imageCount, intervalMs])
 
     return (
-        <div className={`${styles.bannerWrapper} ${className}`} style={{ aspectRatio: `${aspectRatio}/1` }}>
+        <div className={`${banner.bannerWrapper} ${className}`} style={{ aspectRatio: `${aspectRatio}/1` }}>
             <div
-                className={styles.sliderTrack}
+                className={banner.sliderTrack}
                 style={{
                     width: `${imageCount * 100}%`,
                     transform: `translateX(-${current * (100 / imageCount)}%)`,
                 }}>
                 {images.map((img, idx) => (
-                    <div className={styles.slide} key={img.src} style={{ width: `${100 / imageCount}%` }}>
+                    <div className={banner.slide} key={img.src} style={{ width: `${100 / imageCount}%` }}>
                         <img src={img.src} alt={img.alt ?? `배너 이미지 ${idx + 1}`} draggable={false} />
                     </div>
                 ))}
             </div>
             {/* 좌우 화살표 */}
-            <button className={styles.arrow + ' ' + styles.left} onClick={prev} aria-label="이전 배너">
+            <button className={banner.arrow + ' ' + banner.left} onClick={prev} aria-label="이전 배너">
                 &#8592;
             </button>
-            <button className={styles.arrow + ' ' + styles.right} onClick={next} aria-label="다음 배너">
+            <button className={banner.arrow + ' ' + banner.right} onClick={next} aria-label="다음 배너">
                 &#8594;
             </button>
             {/* 인디케이터 */}
-            <div className={styles.indicatorWrapper}>
+            <div className={banner.indicatorWrapper}>
                 {images.map((_, idx) => (
                     <button
                         key={idx}
-                        className={`${styles.indicator} ${current === idx ? styles.active : ''}`}
+                        className={`${banner.indicator} ${current === idx ? banner.active : ''}`}
                         onClick={() => goTo(idx)}
                         aria-label={`배너 ${idx + 1}로 이동`}
                     />
